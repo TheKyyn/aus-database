@@ -1,0 +1,44 @@
+name: Setup sotracteur databases
+
+on:
+  workflow_dispatch:
+    inputs:
+      database:
+        description: 'Database to setup'
+        required: true
+        default: 'postgres'
+        options:
+          - 'postgres'
+          - 'mongo'
+
+jobs:
+  setup-postgres:
+    if: github.event.inputs.database == 'postgres'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: SCP data folder
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: ./data/postgresql
+          target: /home/ubuntu/
+      - name: deploy database with docker compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/data/postgresql
+            docker compose up postgres-aus -d
+            docker compose exec -it postgres psql -U aus-user -d postgres -f /tmp/sql/create-database.sql
+            docker compose exec -it postgres psql -U aus-user -d aus -f /tmp/sql/create-extension.sql
+            docker compose exec -it postgres psql -U aus-user -d aus -f /tmp/sql/create-tables.sql
+            docker compose exec -it postgres psql -U aus-user -d aus -f /tmp/sql/load-data.sql
+            docker compose exec -it postgres psql -U aus-user -d aus -f /tmp/sql/create-views.sql
+
+          
