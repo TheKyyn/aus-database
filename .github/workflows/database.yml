@@ -5,8 +5,7 @@ on:
     inputs:
       database:
         description: 'Database to setup'
-        required: true
-        default: 'postgres'
+        type: 'choice'
         options:
           - 'postgres-bleu'
           - 'postgres-marron'
