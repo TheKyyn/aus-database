@@ -12,7 +12,7 @@ docker compose up -d
 
 ```sh
 # creates aus database
-docker compose exec -it postgres-aus psql -U aus-user -f /tmp/sql/create-database.sql
+docker compose exec -it postgres-aus psql -U aus-user -d postgres -f /tmp/sql/create-database.sql
 ```
 
 ```sh
