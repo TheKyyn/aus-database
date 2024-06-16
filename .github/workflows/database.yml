@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/ubuntu/data/postgresql
+            cd /home/ubuntu/postgresql
             docker compose up postgres-aus -d
             docker compose exec -it postgres psql -U aus-user -d postgres -f /tmp/sql/create-database.sql
             docker compose exec -it postgres psql -U aus-user -d aus -f /tmp/sql/create-extension.sql
