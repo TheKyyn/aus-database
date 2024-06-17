@@ -1,5 +1,9 @@
 # Postgresql
 
+Lancer votre BDD en local, avec Docker et Docker Compose.
+
+## Lancement et initialisation des données
+
 ```sh
 docker network create web
 ```
@@ -8,7 +12,7 @@ docker network create web
 docker compose up -d
 ```
 
-> Note: warning for new apple chips computer are expected, and shouldn't be blocking any of the following commands
+> Note: vous pouvez ignorer les warnings sur Mac M1/M2
 
 ```sh
 # creates aus database
@@ -35,3 +39,26 @@ docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/load-da
 # creates views for aus
 docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-views.sql
 ```
+
+## Requêtez vos données avec pgadmin
+
+- Depuis votre navigateur, allez à l'adresse localhost:5010/
+- Connectez vous avec
+  - login: prof@aus.floless.fr
+  - mdp: aus2025
+- Ajoutez la connection vers postgres
+
+  - Click-droit sur `Servers` > `Register` > `Server`
+  - `Name`: mettez `Local`
+  - Dans le tab `Connection`:
+
+    - `Host name / address`: postgres-aus
+    - `port`: 5432
+    - `user`: aus-user
+    - `password`: aus2025
+
+    ![register](docs/register.png)
+
+- sauvgarder
+
+Vous devriez avoir accès aux tables de `aus` dans le schéma `public`

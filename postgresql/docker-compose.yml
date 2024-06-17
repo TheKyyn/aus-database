@@ -13,6 +13,8 @@ services:
       POSTGRES_USER: aus-user
       POSTGRES_PASSWORD: aus2025
       POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
     networks:
       - web
   pgadmin-aus:
