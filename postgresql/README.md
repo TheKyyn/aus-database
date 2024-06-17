@@ -35,11 +35,6 @@ docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-
 docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/load-data.sql
 ```
 
-```sh
-# creates views for aus
-docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-views.sql
-```
-
 ## Requêtez vos données avec pgadmin
 
 - Depuis votre navigateur, allez à l'adresse localhost:5010/
