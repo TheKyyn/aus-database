@@ -43,4 +43,3 @@ jobs:
             docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-extension.sql
             docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-tables.sql
             docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/load-data.sql
-            docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-views.sql

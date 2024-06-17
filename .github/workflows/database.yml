@@ -1,4 +1,4 @@
-name: Setup sotracteur databases
+name: Setup database
 
 on:
   workflow_dispatch:
