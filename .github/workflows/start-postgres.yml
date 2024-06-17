@@ -38,6 +38,7 @@ jobs:
           script: |
             cd /home/ubuntu/postgresql
             docker compose up postgres-aus -d
+            sleep 10
             docker compose exec -it postgres-aus psql -U aus-user -d postgres -f /tmp/sql/create-database.sql
             docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-extension.sql
             docker compose exec -it postgres-aus psql -U aus-user -d aus -f /tmp/sql/create-tables.sql
